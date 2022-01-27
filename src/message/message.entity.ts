@@ -1,16 +1,27 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class MessageEntity {
+export class Message {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  public id: string;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+    length: 255,
+    nullable: false,
+  })
+  sender: string;
+
+  @Column({
+    type: 'varchar',
+    length: 255,
+    nullable: false,
+  })
   message: string;
 
-  @Column()
-  sentAt: string;
-
-  @Column()
-  deleteAt: string;
+  @Column({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
+  date: Date;
 }

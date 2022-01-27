@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { SocketGateway } from './socket.gateway';
+import { MessageGateway } from './message/message.gateway';
 import { TypeOrmCoreModule } from '@nestjs/typeorm/dist/typeorm-core.module';
 import { AuthModule } from './auth/auth.module';
+import { ChatModule } from './chat/chat.module';
+import { MessageModule } from './message/message.module';
 
 @Module({
   imports: [
@@ -18,8 +20,10 @@ import { AuthModule } from './auth/auth.module';
       synchronize: true,
     }),
     AuthModule,
+    ChatModule,
+    MessageModule,
   ],
   controllers: [AppController],
-  providers: [AppService, SocketGateway],
+  providers: [AppService],
 })
 export class AppModule {}
